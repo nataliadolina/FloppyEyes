@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6221628406406695950
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3535157297316086130}
+  - component: {fileID: 5109888205602590370}
+  m_Layer: 0
+  m_Name: CoinsGenerator (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3535157297316086130
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6221628406406695950}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -23.284832, y: 0.32131088, z: -5.203098}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5109888205602590370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6221628406406695950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86edf7fcf9545704ca630c1fe12f6db4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Coins:
+  - {fileID: 9166100996755773862, guid: 238d012e830893c4ba0e0b90c3fb0e46, type: 3}
+  - {fileID: 5163350734195506352, guid: 333c760c65d8f1f4c92d7ac86656e002, type: 3}
+  - {fileID: 7859471083975666558, guid: d877f3c9367875048a5c70f3d76a8290, type: 3}
+  - {fileID: 7059904882671166947, guid: 1e3f6e942e74d594faf664b64626bdb4, type: 3}
+  - {fileID: 8654584996494373464, guid: abcdf78d799aa0e46a57e22bc85a8b8a, type: 3}
+  - {fileID: 550023177877542342, guid: dfeca92291bfb3c47917a9e67fc5cb93, type: 3}
+  - {fileID: 7476465753324131788, guid: 14bf8bfc6892cb84bbb41facdc158087, type: 3}
+  pos: {fileID: 3535157297316086130}
+  obj: {fileID: 1340487827731686, guid: 1b36e1bf30151490d98e82d972588de6, type: 3}
+  prefabinstance: {fileID: 4437934054960206, guid: 1b36e1bf30151490d98e82d972588de6,
+    type: 3}
