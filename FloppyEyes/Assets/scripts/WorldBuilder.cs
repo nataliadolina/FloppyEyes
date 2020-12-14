@@ -56,9 +56,11 @@ public class WorldBuilder : MonoBehaviour
     private void CreateFreePlatform(int num = -1)
     {
         int index = -1;
+        Transform endPoint = lastPlatform.GetComponent<PlatformController>().endPoint;
+        Debug.Log(endPoint);
         Vector3 pos = (lastPlatform == null) ?
             platformContainer.position :
-            lastPlatform.GetComponent<PlatformController>().endPoint.position;
+            endPoint.position;
         if (num == -1)
             index = Random.Range(0, freePlatforms.Length);
         else

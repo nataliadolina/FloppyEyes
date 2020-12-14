@@ -48,7 +48,7 @@ public class WorldController : MonoBehaviour
     void Update()
     {
         time += Time.deltaTime;
-        if (time>=5 && !YunaController.instance.dead)
+        if (time >= 5)
         {
             speed_z += 0.2f;
             time = 0;

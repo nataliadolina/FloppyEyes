@@ -8,7 +8,6 @@ public class StateMove : State
 
     private int currentRoad;
     private int currentDir;
-    private float distance;
     private float currentTime;
 
     private void Start()
@@ -72,7 +71,7 @@ public class StateMove : State
         }
     }
 
-    public override void Hit(float delta, Collider hitCollider)
+    public override void Hit(ControllerColliderHit hit)
     {
         Yuna.Lose();
     }

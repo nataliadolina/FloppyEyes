@@ -6,10 +6,7 @@ public class StateClimb : State
 {
     [SerializeField] private float timeClimb;
 
-    private float distance;
     private float currentTime;
-
-    public float Distance { set => distance = value; }
 
     private void Awake()
     {
@@ -18,7 +15,7 @@ public class StateClimb : State
 
     public override void Run()
     {
-        while (currentTime < timeClimb)
+        if (currentTime < timeClimb)
         {
             currentTime += Time.fixedDeltaTime;
             float speed = distance / timeClimb;
@@ -26,8 +23,11 @@ public class StateClimb : State
             cc.Move(Vector3.up * tmpDist);
 
         }
-        currentTime = 0f;
-        Terminate();
-        return;
+        else
+        {
+            currentTime = 0f;
+            Terminate();
+            return;
+        }
     }
 }

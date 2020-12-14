@@ -38,6 +38,7 @@ public class Yuna : MonoBehaviour
         yunaAnim = GetComponent<Animator>();
         bodyRigidBodies = GetComponentsInChildren<Rigidbody>();
 
+        TurnOffRigidBodies();
         Lose += TurnOnRigidBodies;
     }
 
@@ -58,11 +59,24 @@ public class Yuna : MonoBehaviour
         }
     }
 
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        currentState.Hit(hit);
+    }
+
     private void TurnOnRigidBodies()
     {
         foreach (var body in bodyRigidBodies)
         {
             body.isKinematic = false;
+        }
+    }
+
+    private void TurnOffRigidBodies()
+    {
+        foreach (var body in bodyRigidBodies)
+        {
+            body.isKinematic = true;
         }
     }
 

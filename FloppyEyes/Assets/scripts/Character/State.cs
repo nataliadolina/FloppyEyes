@@ -6,6 +6,8 @@ public abstract class State : MonoBehaviour
 {
     [SerializeField] private State nextState;
 
+    public float distance;
+
     protected State[] otherStates;
     protected Yuna character;
     protected bool isRunning;
@@ -15,7 +17,7 @@ public abstract class State : MonoBehaviour
     private void Awake()
     {
         character = GetComponentInParent<Yuna>();
-        animator = GetComponent<Animator>();
+        animator = character.GetComponent<Animator>();
         cc = character.GetComponent<CharacterController>();
     }
 
@@ -30,7 +32,7 @@ public abstract class State : MonoBehaviour
 
     }
 
-    public virtual void Hit(float delta, Collider hitCollider)
+    public virtual void Hit(ControllerColliderHit hit)
     {
 
     }

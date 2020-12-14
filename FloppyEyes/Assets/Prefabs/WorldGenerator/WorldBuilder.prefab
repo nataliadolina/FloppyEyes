@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8004701843170071482
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8004701843170071460}
+  - component: {fileID: 8004701843170071483}
+  m_Layer: 0
+  m_Name: WorldBuilder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8004701843170071460
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8004701843170071482}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 30.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8004701843170071483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8004701843170071482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33f2232710b7d2642accb7cf6da77667, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  freePlatforms:
+  - {fileID: 7584017819732629464, guid: d6d035aef830da74599b53de72706932, type: 3}
+  - {fileID: 8104564174049838162, guid: 3d11cef9b36ea904fa18def6db89c333, type: 3}
+  - {fileID: 5011572567591409560, guid: 2d37ecf7a1a3ac04f9145c853931db9b, type: 3}
+  obstaclePlatforms:
+  - {fileID: 1966958287751809918, guid: 734f22198cd616e448f0621047732eba, type: 3}
+  - {fileID: 980358052909548134, guid: ea8339eb85a5b4945aaf57049b525b59, type: 3}
+  - {fileID: 8820586786487071823, guid: 3865158b4dcd9eb4eab446567640da3e, type: 3}
+  - {fileID: 8849098959454682567, guid: 1d8b74c426ca2d343aa1efab9e417754, type: 3}
+  - {fileID: 4927913809178918805, guid: 0752c76f7948f94459f0376ad345e87d, type: 3}
+  platformContainer: {fileID: 0}
+  currentPlatform: {fileID: 0}
+  isObstacle: 0
