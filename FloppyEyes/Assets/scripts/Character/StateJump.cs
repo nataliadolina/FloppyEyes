@@ -4,18 +4,20 @@ using UnityEngine;
 
 public class StateJump : State
 {
-    [SerializeField] private float jumpHeight;
-    [SerializeField] private float timeJump;
+    [SerializeField] private float startSpeed;
     [SerializeField] private float gravity;
 
     private float startHeight;
+    private float currentSpeed;
+
+    private float timeJump;
     private float currentTime;
-    private float startSpeed;
 
     private void Start()
     {
-        currentTime = 0f;
-        startSpeed = jumpHeight / timeJump + gravity * timeJump / 2;
+        startHeight = character.transform.position.y;
+        currentSpeed = startSpeed;
+        timeJump = 2 * startSpeed / gravity;
     }
 
     public override void Run()
@@ -23,17 +25,17 @@ public class StateJump : State
         if (currentTime < timeJump)
         {
             currentTime += Time.deltaTime;
-            startSpeed -= gravity * Time.deltaTime;
-            float tmpDist = Time.deltaTime * startSpeed;
+            currentSpeed -= gravity * Time.deltaTime;
+            float tmpDist = Time.deltaTime * currentSpeed;
             cc.Move(Vector3.up * tmpDist);
 
         }
         else
         {
+            currentSpeed = startSpeed;
             currentTime = 0f;
-            Debug.Log("Jump reset");
+            character.transform.position = new Vector3(character.transform.position.x, startHeight, character.transform.position.z);
             Terminate();
-            return;
         }
     }
 
