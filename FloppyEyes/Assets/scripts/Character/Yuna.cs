@@ -23,7 +23,7 @@ public class Yuna : MonoBehaviour
     private Dictionary<StatesEnum, State> states;
 
     public static Action Lose;
-    private Rigidbody[] bodyRigidBodies;
+    public static Action FreezeRagdoll;
 
     void Start()
     {
@@ -35,13 +35,10 @@ public class Yuna : MonoBehaviour
             { StatesEnum.Lose, lose}
         };
 
+        FreezeRagdoll();
         yunaAnim = GetComponent<Animator>();
-        bodyRigidBodies = GetComponentsInChildren<Rigidbody>();
 
-        TurnOffRigidBodies();
-        Lose += TurnOnRigidBodies;
     }
-
     
     private void Update()
     {
@@ -63,21 +60,4 @@ public class Yuna : MonoBehaviour
     {
         currentState.Hit(hit);
     }
-
-    private void TurnOnRigidBodies()
-    {
-        foreach (var body in bodyRigidBodies)
-        {
-            body.isKinematic = false;
-        }
-    }
-
-    private void TurnOffRigidBodies()
-    {
-        foreach (var body in bodyRigidBodies)
-        {
-            body.isKinematic = true;
-        }
-    }
-
 }

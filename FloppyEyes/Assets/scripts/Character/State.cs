@@ -6,19 +6,21 @@ public abstract class State : MonoBehaviour
 {
     [SerializeField] private State nextState;
 
-    public float distance;
+    [HideInInspector] public float distance;
 
     protected State[] otherStates;
     protected Yuna character;
     protected bool isRunning;
     protected Animator animator;
     protected CharacterController cc;
+    protected Transform characterTransform;
 
     private void Awake()
     {
         character = GetComponentInParent<Yuna>();
-        animator = character.GetComponent<Animator>();
-        cc = character.GetComponent<CharacterController>();
+        characterTransform = character.gameObject.transform;
+        animator = character.gameObject.GetComponent<Animator>();
+        cc = character.gameObject.GetComponent<CharacterController>();
     }
 
     public abstract void Run();

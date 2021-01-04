@@ -57,7 +57,6 @@ public class WorldBuilder : MonoBehaviour
     {
         int index = -1;
         Transform endPoint = lastPlatform.GetComponent<PlatformController>().endPoint;
-        Debug.Log(endPoint);
         Vector3 pos = (lastPlatform == null) ?
             platformContainer.position :
             endPoint.position;

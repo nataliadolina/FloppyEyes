@@ -4,28 +4,39 @@ using UnityEngine;
 
 public class StateClimb : State
 {
-    [SerializeField] private float timeClimb;
-
+    private float timeClimb;
     private float currentTime;
 
-    private void Awake()
+    private void Start()
     {
         currentTime = 0f;
+        AnimationClip[] clips = animator.runtimeAnimatorController.animationClips;
+
+        foreach (AnimationClip clip in clips)
+        {
+            name = clip.name;
+            if (name == "Climbing")
+            {
+                timeClimb = clip.length;
+                Debug.Log(timeClimb);
+            }
+        }
     }
 
     public override void Run()
     {
         if (currentTime < timeClimb)
         {
-            currentTime += Time.fixedDeltaTime;
+            currentTime += Time.deltaTime;
             float speed = distance / timeClimb;
-            float tmpDist = Time.fixedDeltaTime * speed;
+            float tmpDist = Time.deltaTime * speed;
             cc.Move(Vector3.up * tmpDist);
-
+            
         }
         else
         {
             currentTime = 0f;
+            WorldController.instance.speed_z = WorldController.instance.initial_speed;
             Terminate();
             return;
         }

@@ -73,6 +73,7 @@ public class StateMove : State
 
     public override void Hit(ControllerColliderHit hit)
     {
-        Yuna.Lose();
+        if (!hit.collider.CompareTag("Untagged"))
+            Yuna.Lose();
     }
 }

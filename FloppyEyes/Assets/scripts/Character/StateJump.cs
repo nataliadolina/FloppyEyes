@@ -41,25 +41,30 @@ public class StateJump : State
 
     public override void Hit(ControllerColliderHit hit)
     {
+        
         Transform otherTransform = hit.transform;
         Collider hitCollider = hit.collider;
-        float delta = otherTransform.localScale.y - character.transform.position.y + character.transform.localScale.y * 0.75f;
-        animator.SetTrigger("climb");
-
-        if (delta > 5 || hitCollider.CompareTag("kill") || hitCollider.CompareTag("ball")) /*если слишком высоко, то игра заканчивается*/
+        Debug.Log("Collided with" + hitCollider.tag);
+        float delta = otherTransform.localScale.y - characterTransform.position.y + characterTransform.localScale.y * 0.75f;
+        Debug.Log(delta);
+        if (delta > 5 || hitCollider.CompareTag("kill")) /*если слишком высоко, то игра заканчивается*/
             Yuna.Lose();
         
-        else if (delta <= 5 && delta > 0.6)
+        else if (hitCollider.CompareTag("Obstacle"))
         {
-            character.currentState = character.climb;
-            character.currentState.distance = delta;
-            hitCollider.tag = "-";
+            if (delta <= 5 && delta > 0.6)
+            {
+                animator.SetTrigger("climb");
+                WorldController.instance.speed_z = 0f;
+                character.currentState = character.climb;
+                character.currentState.distance = delta;
+                hitCollider.tag = "-";
+            }
+            else if (delta <= 0.6)
+            {
+                hitCollider.tag = "-";
+            }
         }
-        else if (delta <= 0.6)
-        {
-            hitCollider.tag = "-";
-        }
-
         
     }
 }
