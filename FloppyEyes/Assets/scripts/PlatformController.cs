@@ -4,41 +4,36 @@ using UnityEngine;
 
 public class PlatformController : MonoBehaviour
 {
-    public Transform endPoint;
+    [SerializeField] public float newPlatformAppearLimit = -10f;
+    [SerializeField] public Transform endPoint;
+
     public GameObject ground;
     private float dist;
-
-    private Transform myTransform;
     
-    MeshFilter meshFilter;
-    // Start is called before the first frame update
+    private WorldBuilder builder;
+
     void Awake()
     {
-        meshFilter = ground.GetComponent<MeshFilter>();
+        builder = FindObjectOfType<WorldBuilder>();
+
+        MeshFilter meshFilter = ground.GetComponent<MeshFilter>();
         dist = meshFilter.sharedMesh.bounds.size.z * ground.transform.localScale.z;
-        WorldController.instance.OnPlatformMovement += TryDelAndAddPlatform;
+
+        WorldController.OnPlatformMovement += TryDelAndAddPlatform;
         DontDestroyOnLoad(gameObject);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-    }
     private void TryDelAndAddPlatform()
     {
-        if (endPoint.transform.position.z <= WorldController.instance.minZ)
+        if (endPoint.transform.position.z <= newPlatformAppearLimit)
         {
-            WorldController.instance.worldBuilder.CreatePlatform();
+            builder.CreatePlatform();
             Destroy(gameObject);
         }
             
     }
     private void OnDestroy()
     {
-        if (WorldController.instance)
-        {
-            WorldController.instance.OnPlatformMovement -= TryDelAndAddPlatform;
-        }
-
+        WorldController.OnPlatformMovement -= TryDelAndAddPlatform;
     }
 }

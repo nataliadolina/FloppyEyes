@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2296629592746917463
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6318662817985179605}
+  - component: {fileID: 8073001814895363306}
+  m_Layer: 0
+  m_Name: GemsGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6318662817985179605
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2296629592746917463}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8073001814895363306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2296629592746917463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9f15029007d00c45a82b984d6c27f63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  appearGemProbability: 0.5
+  gemModels:
+  - {fileID: 9166100996755773862, guid: 238d012e830893c4ba0e0b90c3fb0e46, type: 3}
+  - {fileID: 5163350734195506352, guid: 333c760c65d8f1f4c92d7ac86656e002, type: 3}
+  - {fileID: 7859471083975666558, guid: d877f3c9367875048a5c70f3d76a8290, type: 3}
+  - {fileID: 7059904882671166947, guid: 1e3f6e942e74d594faf664b64626bdb4, type: 3}
+  - {fileID: 8654584996494373464, guid: abcdf78d799aa0e46a57e22bc85a8b8a, type: 3}
+  - {fileID: 550023177877542342, guid: dfeca92291bfb3c47917a9e67fc5cb93, type: 3}
+  - {fileID: 7476465753324131788, guid: 14bf8bfc6892cb84bbb41facdc158087, type: 3}

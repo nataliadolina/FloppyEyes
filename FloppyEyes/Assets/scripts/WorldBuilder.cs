@@ -4,95 +4,43 @@ using UnityEngine;
 
 public class WorldBuilder : MonoBehaviour
 {
-    public GameObject[] freePlatforms;
-    public GameObject[] obstaclePlatforms;
+    [SerializeField] private GameObject[] freePlatforms;
+    [SerializeField] private GameObject[] obstaclePlatforms;
+
     public Transform platformContainer;
-    private Transform lastPlatform;
-    public GameObject currentPlatform;
-    public static WorldBuilder instance;
+    public static Transform lastPlatform;
     public bool isObstacle;
-    // Start is called before the first frame update
-    private void Awake()
-    {
-        currentPlatform = freePlatforms[0];
-        if (WorldBuilder.instance != null)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        WorldBuilder.instance = this;
-        //DontDestroyOnLoad(gameObject);
-    }
+
+    Dictionary<bool, GameObject[]> platforms;
+
     void Start()
     {
+        platforms = new Dictionary<bool, GameObject[]>
+        {
+            {true, obstaclePlatforms},
+            {false, freePlatforms},
+        };
+        platformContainer = FindObjectOfType<WorldController>().transform;
         Init();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     public void Init()
     {
-        CreateFirstPlatform();
-        CreateFreePlatform();
-        CreateObstaclePlatform();
-        CreateFreePlatform();
-        CreateObstaclePlatform();
-        CreateFreePlatform();
+        for (int i = 0; i < 6; i++)
+            CreatePlatform();
     }
-    public void CreatePlatform()
-    {
-        if (isObstacle)
-        {
-            CreateFreePlatform();
-        }
-        else
-        {
-            CreateObstaclePlatform();
-        }
-    }
-    private void CreateFreePlatform(int num = -1)
+
+    public void CreatePlatform(int num = -1)
     {
         int index = -1;
-        Transform endPoint = lastPlatform.GetComponent<PlatformController>().endPoint;
         Vector3 pos = (lastPlatform == null) ?
             platformContainer.position :
-            endPoint.position;
+            lastPlatform.GetComponent<PlatformController>().endPoint.position;
         if (num == -1)
             index = Random.Range(0, freePlatforms.Length);
         else
             index = num;
-        GameObject res = Instantiate(freePlatforms[index], pos, Quaternion.identity, platformContainer);
+        GameObject res = Instantiate(platforms[isObstacle][index], pos, Quaternion.identity, platformContainer);
         lastPlatform = res.transform;
-        currentPlatform = res;
-        isObstacle = false;
-
-    }
-    private void CreateObstaclePlatform(int num = -1)
-    {
-        int index = -1;
-        Vector3 pos = (lastPlatform == null) ?
-            platformContainer.position :
-            lastPlatform.GetComponent<PlatformController>().endPoint.position;
-        if (num == -1)
-            index = Random.Range(0, obstaclePlatforms.Length);
-        else
-            index = num;
-        GameObject res = Instantiate(obstaclePlatforms[index], pos, Quaternion.identity, platformContainer);
-        lastPlatform = res.transform;
-        currentPlatform = res;
-        isObstacle = true;
-    }
-    private void CreateFirstPlatform()
-    {
-        Vector3 pos = (lastPlatform == null) ?
-            platformContainer.position :
-            lastPlatform.GetComponent<PlatformController>().endPoint.position;
-        GameObject res = Instantiate(freePlatforms[0], pos, Quaternion.identity, platformContainer);
-        lastPlatform = res.transform;
-        currentPlatform = res;
-        isObstacle = false;
     }
 }

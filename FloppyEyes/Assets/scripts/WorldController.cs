@@ -1,61 +1,44 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class WorldController : MonoBehaviour
 {
-    public float initial_speed = 2.5f;
-    public float speed_z;
-    public float speed;
-    public WorldBuilder worldBuilder;
+    [SerializeField] static float initial_speed = 2.5f;
+    static float cur_speed = 0f;
+    static float speed = 0f;
 
-    public delegate void TryDeleteGem();
-    public event TryDeleteGem DeleteGem;
+    public static float CurrentSpeed { get => cur_speed; set => cur_speed = value; }
+    public static float LastSpeed { get => speed; set => speed = value; }
 
-    public delegate void TryToDelAndAddPlatform();
-    public event TryToDelAndAddPlatform OnPlatformMovement;
+    public static event Action DeleteGem;
+    public static event Action OnPlatformMovement;
 
-    public static WorldController instance;
-    public float minZ = -10;
-    private float time;
-    public GameObject platform;
-    // Start is called before the first frame update
-    private void Awake() 
-    {
-        if (WorldController.instance != null)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        WorldController.instance = this;
-        //DontDestroyOnLoad(gameObject);
-    }
-    //private void OnDestroy()
-    //{
-    //    WorldController.instance = null;
-    //}
+    private float timeSinceLastAccelerate;
+
     void Start()
     {
         if (PlayerPrefs.HasKey("Speed"))
-            speed_z = PlayerPrefs.GetFloat("Speed");
+            cur_speed = PlayerPrefs.GetFloat("Speed");
         else
-            speed_z = initial_speed;
-        speed = speed_z;
-        StartCoroutine(OnPlatformMovementCorutine());
+            cur_speed = initial_speed;
+        speed = cur_speed;
+        StartCoroutine(OnPlatformMovementCoroutine());
     }
 
-    // Update is called once per frame
     void Update()
     {
-        time += Time.deltaTime;
-        if (time >= 5)
+        timeSinceLastAccelerate += Time.deltaTime;
+        if (timeSinceLastAccelerate >= 5)
         {
-            speed_z += 0.2f;
-            time = 0;
+            cur_speed += 0.2f;
+            timeSinceLastAccelerate = 0;
         }
-        transform.position -= Vector3.forward * speed_z * Time.deltaTime; 
+        transform.position -= Vector3.forward * cur_speed * Time.deltaTime; 
     }
-    IEnumerator OnPlatformMovementCorutine()
+
+    private IEnumerator OnPlatformMovementCoroutine()
     {
         while (true)
         {
@@ -69,6 +52,21 @@ public class WorldController : MonoBehaviour
                     DeleteGem();
                 }
         }
+    }
+
+    public static void SaveCurrentSpeed()
+    {
+        speed = cur_speed;
+    }
+
+    public static void StopMoving()
+    {
+        cur_speed = 0f;
+    }
+
+    public static void ContinueMoving()
+    {
+        cur_speed = speed;
     }
 }
  

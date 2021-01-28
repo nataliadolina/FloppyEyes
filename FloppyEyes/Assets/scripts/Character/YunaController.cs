@@ -165,7 +165,7 @@ public class YunaController : MonoBehaviour
     {
         yield return new WaitForSeconds(timeClimb+0.5f);
         isClimbing = false;
-        WorldController.instance.speed_z = WorldController.instance.speed;
+        WorldController.SaveCurrentSpeed();
 
     }
     private IEnumerator WaitToStopMoving()
@@ -186,11 +186,11 @@ public class YunaController : MonoBehaviour
         if (ShowScore.score > PlayerPrefs.GetFloat("BestScore"))
             PlayerPrefs.SetFloat("BestScore", ShowScore.score);
         PlayerPrefs.SetFloat("Score", 0f);
-        PlayerPrefs.SetFloat("Speed", WorldController.instance.initial_speed);
+        PlayerPrefs.SetFloat("Speed", WorldController.LastSpeed);
     }
     public void PhysicKill() /*влючает рэгдолл на персонаже*/
     {
-        WorldController.instance.speed_z = 0;
+        WorldController.StopMoving();
         animator.enabled = false;
         turnonrb();
         dead = true;
@@ -201,7 +201,7 @@ public class YunaController : MonoBehaviour
     public void AnimatedKill() /*включает анимацию*/
     {
         dead = true;
-        WorldController.instance.speed_z = 0;
+        WorldController.StopMoving();
         animator.SetTrigger("dead");
         coroutine = Restart(timeDie);
         StartCoroutine(coroutine);
@@ -211,8 +211,8 @@ public class YunaController : MonoBehaviour
         isClimbing = true;
         animator.SetTrigger("climb");
         distance = delta1;
-        WorldController.instance.speed = WorldController.instance.speed_z;
-        WorldController.instance.speed_z = 0;
+        WorldController.SaveCurrentSpeed();
+        WorldController.StopMoving();
         StartCoroutine(WaitToStopClimbing());
     }
 }

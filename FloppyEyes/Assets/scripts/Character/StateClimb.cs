@@ -36,7 +36,7 @@ public class StateClimb : State
         else
         {
             currentTime = 0f;
-            WorldController.instance.speed_z = WorldController.instance.initial_speed;
+            WorldController.ContinueMoving();
             Terminate();
             return;
         }

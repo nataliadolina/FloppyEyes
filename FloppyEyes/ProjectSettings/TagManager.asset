@@ -16,6 +16,7 @@ TagManager:
   - Armature
   - Manager
   - Ball
+  - GemContainer
   layers:
   - Default
   - TransparentFX

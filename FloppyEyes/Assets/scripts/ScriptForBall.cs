@@ -15,7 +15,9 @@ public class ScriptForBall : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        target = Instantiate(targetingGreen, new Vector3(transform.position.x, 0.4f, transform.position.z), Quaternion.Euler(90, 0, 0), WorldBuilder.instance.currentPlatform.transform);
+        var builder = FindObjectOfType<WorldBuilder>();
+
+        // target = Instantiate(targetingGreen, new Vector3(transform.position.x, 0.4f, transform.position.z), Quaternion.Euler(90, 0, 0), builder.currentPlatform.transform);
         rb.AddForce(Vector3.up * Random.Range(force1, force2));
     }
 
@@ -25,12 +27,12 @@ public class ScriptForBall : MonoBehaviour
         if (transform.position.y <= 3.5f)
         {
             Destroy(target.gameObject);
-            target = Instantiate(targetingRed, new Vector3(transform.position.x, 0.4f, transform.position.z), Quaternion.Euler(90, 0, 0), WorldBuilder.instance.currentPlatform.transform);
+            //target = Instantiate(targetingRed, new Vector3(transform.position.x, 0.4f, transform.position.z), Quaternion.Euler(90, 0, 0), WorldBuilder.instance.currentPlatform.transform);
         }
         else if (transform.position.y > 3.5f)
         {
             Destroy(target.gameObject);
-            target = Instantiate(targetingGreen, new Vector3(transform.position.x, 0.4f, transform.position.z), Quaternion.Euler(90, 0, 0), WorldBuilder.instance.currentPlatform.transform);
+            //target = Instantiate(targetingGreen, new Vector3(transform.position.x, 0.4f, transform.position.z), Quaternion.Euler(90, 0, 0), WorldBuilder.instance.currentPlatform.transform);
         }
     }
     private void OnTriggerEnter(Collider other)

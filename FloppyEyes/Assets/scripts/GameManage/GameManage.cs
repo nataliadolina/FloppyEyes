@@ -65,6 +65,6 @@ public class GameManage : MonoBehaviour
         {
             PlayerPrefs.SetFloat("BestScore", ShowScore.score);
         }
-        PlayerPrefs.SetFloat("Speed", WorldController.instance.speed_z);
+        PlayerPrefs.SetFloat("Speed", WorldController.CurrentSpeed);
     }
 }

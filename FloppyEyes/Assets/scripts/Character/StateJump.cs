@@ -44,9 +44,7 @@ public class StateJump : State
         
         Transform otherTransform = hit.transform;
         Collider hitCollider = hit.collider;
-        Debug.Log("Collided with" + hitCollider.tag);
         float delta = otherTransform.localScale.y - characterTransform.position.y + characterTransform.localScale.y * 0.75f;
-        Debug.Log(delta);
         if (delta > 5 || hitCollider.CompareTag("kill")) /*если слишком высоко, то игра заканчивается*/
             Yuna.Lose();
         
@@ -55,7 +53,8 @@ public class StateJump : State
             if (delta <= 5 && delta > 0.6)
             {
                 animator.SetTrigger("climb");
-                WorldController.instance.speed_z = 0f;
+                WorldController.SaveCurrentSpeed();
+                WorldController.StopMoving();
                 character.currentState = character.climb;
                 character.currentState.distance = delta;
                 hitCollider.tag = "-";
