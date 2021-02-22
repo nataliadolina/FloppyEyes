@@ -20,7 +20,6 @@ public class PlatformController : MonoBehaviour
         dist = meshFilter.sharedMesh.bounds.size.z * ground.transform.localScale.z;
 
         WorldController.OnPlatformMovement += TryDelAndAddPlatform;
-        DontDestroyOnLoad(gameObject);
     }
 
     private void TryDelAndAddPlatform()

@@ -7,8 +7,8 @@ public class ShowScore : MonoBehaviour
 {
     public static float score;
     private static Text text;
-    // Start is called before the first frame update
-    void Start()
+
+    private void Start()
     {
         text = GetComponent<Text>();
         if (PlayerPrefs.HasKey("Score"))
@@ -20,6 +20,7 @@ public class ShowScore : MonoBehaviour
         text.text = score.ToString();
         text = GetComponent<Text>();
     }
+
     public static void ChangeScore()
     {
         score += 0.5f;

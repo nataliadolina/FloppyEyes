@@ -5,9 +5,8 @@ using UnityEngine.UI;
 
 public class ShowBestScore : MonoBehaviour
 {
-    Text content;
-    string score;
-    // Start is called before the first frame update
+    private Text content;
+
     void Start()
     {
         content = GetComponent<Text>();
@@ -15,7 +14,7 @@ public class ShowBestScore : MonoBehaviour
         {
             PlayerPrefs.SetFloat("BestScore", 0f);
         }
-        score = PlayerPrefs.GetFloat("BestScore").ToString();
+        string score = PlayerPrefs.GetFloat("BestScore").ToString();
         content.text = score;
     }
 }

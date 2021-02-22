@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class State : MonoBehaviour
 {
-    [SerializeField] private State nextState;
+    [SerializeField] protected State nextState;
 
     [HideInInspector] public float distance;
 
@@ -14,13 +14,15 @@ public abstract class State : MonoBehaviour
     protected Animator animator;
     protected CharacterController cc;
     protected Transform characterTransform;
+    protected GameManage gameManager;
 
-    private void Awake()
+    private void OnEnable()
     {
         character = GetComponentInParent<Yuna>();
-        characterTransform = character.gameObject.transform;
-        animator = character.gameObject.GetComponent<Animator>();
-        cc = character.gameObject.GetComponent<CharacterController>();
+        characterTransform = character.transform;
+        animator = character.GetComponent<Animator>();
+        cc = character.GetComponent<CharacterController>();
+        gameManager = FindObjectOfType<GameManage>();
     }
 
     public abstract void Run();
@@ -29,12 +31,26 @@ public abstract class State : MonoBehaviour
     {
         character.currentState = nextState;
     }
+
+    protected void Lose()
+    {
+        animator.enabled = false;
+        Yuna.Lose();
+        WorldController.StopMoving();
+        gameManager.Restart();
+    }
+
     public virtual void Move()
     {
 
     }
 
-    public virtual void Hit(ControllerColliderHit hit)
+    public virtual void Fall()
+    {
+        
+    }
+
+    public virtual void Hit(Collision coll)
     {
 
     }

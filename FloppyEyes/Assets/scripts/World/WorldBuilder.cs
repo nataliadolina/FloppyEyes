@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class WorldBuilder : MonoBehaviour
 {
-    [SerializeField] private GameObject[] freePlatforms;
-    [SerializeField] private GameObject[] obstaclePlatforms;
+    [SerializeField] private GameObject[] freePlatforms = null;
+    [SerializeField] private GameObject[] obstaclePlatforms = null;
 
     public Transform platformContainer;
     public static Transform lastPlatform;
-    public bool isObstacle;
+    public bool isObstacle = false;
 
-    Dictionary<bool, GameObject[]> platforms;
+    private Dictionary<bool, GameObject[]> platforms;
 
     void Start()
     {
@@ -37,10 +37,11 @@ public class WorldBuilder : MonoBehaviour
             platformContainer.position :
             lastPlatform.GetComponent<PlatformController>().endPoint.position;
         if (num == -1)
-            index = Random.Range(0, freePlatforms.Length);
+            index = Random.Range(0, platforms[isObstacle].Length);
         else
             index = num;
         GameObject res = Instantiate(platforms[isObstacle][index], pos, Quaternion.identity, platformContainer);
         lastPlatform = res.transform;
+        isObstacle = !isObstacle;
     }
 }

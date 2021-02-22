@@ -7,6 +7,8 @@ public class StateClimb : State
     private float timeClimb;
     private float currentTime;
 
+    private float groundPos = -80f;
+
     private void Start()
     {
         currentTime = 0f;
@@ -20,6 +22,14 @@ public class StateClimb : State
                 timeClimb = clip.length;
                 Debug.Log(timeClimb);
             }
+        }
+    }
+
+    public override void Hit(Collision coll)
+    {
+        if (coll.collider.CompareTag("Untagged") & groundPos == -80f)
+        {
+            groundPos = coll.transform.position.y;
         }
     }
 
@@ -37,6 +47,7 @@ public class StateClimb : State
         {
             currentTime = 0f;
             WorldController.ContinueMoving();
+            nextState.distance = characterTransform.position.y - groundPos;
             Terminate();
             return;
         }

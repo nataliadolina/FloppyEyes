@@ -3,29 +3,34 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Manage : MonoBehaviour
+public class MenuActions : MonoBehaviour
 {
-    [SerializeField]
-    float waitTime = 0.5f;
-    public GameObject manager;
-    private GetAudioSource audios;
+    [SerializeField] private float waitTime = 0.5f;
+    [SerializeField] private GameObject manager;
+
+    private AudioSource click;
+
     private void Start()
     {
-        audios = manager.GetComponent<GetAudioSource>();
+        click = manager.GetComponent<AudioSource>();
     }
+
     public void LoadLevel()
     {
-        audios.source.Play();
+        click.Play();
         StartCoroutine(Wait());
     }
+
     public void PlaySound()
     {
-        audios.source.Play();
+        click.Play();
     }
-    public void ByeBye()
+
+    public void Quit()
     {
         Application.Quit();
     }
+
     private IEnumerator Wait()
     {
         yield return new WaitForSeconds(waitTime);

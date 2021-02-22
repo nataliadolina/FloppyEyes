@@ -3,39 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public enum StatesEnum
-{
-    Run,
-    Jump,
-    Climb,
-    Lose
-}
-
 public class Yuna : MonoBehaviour
 {
     [SerializeField] public State run;
     [SerializeField] public State jump;
     [SerializeField] public State climb;
-    [SerializeField] public State lose;
+    [SerializeField] public State fall;
+
+    public static Action Lose;
+    public static Action Restart;
 
     private Animator yunaAnim;
     public State currentState;
-    private Dictionary<StatesEnum, State> states;
-
-    public static Action Lose;
-    public static Action FreezeRagdoll;
 
     void Start()
     {
-        states = new Dictionary<StatesEnum, State>
-        {
-            { StatesEnum.Run, run },
-            { StatesEnum.Jump, jump },
-            { StatesEnum.Climb, climb},
-            { StatesEnum.Lose, lose}
-        };
-
-        FreezeRagdoll();
+        Debug.Log("enabled");
         yunaAnim = GetComponent<Animator>();
 
     }
@@ -56,8 +39,16 @@ public class Yuna : MonoBehaviour
         }
     }
 
-    private void OnControllerColliderHit(ControllerColliderHit hit)
+    private void OnCollisionEnter(Collision coll)
     {
-        currentState.Hit(hit);
+        currentState.Hit(coll);
     }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        Debug.Log("CollisionExit");
+        currentState.Fall();
+    }
+
+
 }

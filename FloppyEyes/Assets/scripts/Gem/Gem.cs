@@ -7,13 +7,13 @@ public class Gem : MonoBehaviour
 {
     [SerializeField] private GameObject sparkles;
 
-    private AudioSource audio;
+    private AudioSource pickUpSound;
     private ParticleSystem[] particleSys;
 
     private void OnEnable()
     {
         particleSys = sparkles.GetComponentsInChildren<ParticleSystem>();
-        audio = GetComponent<AudioSource>();
+        pickUpSound = GetComponent<AudioSource>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -25,7 +25,7 @@ public class Gem : MonoBehaviour
                 sys.Play();
                 sys.transform.parent = null;
             }
-
+            pickUpSound.Play();
             Destroy(sparkles);
             Destroy(gameObject);
         }

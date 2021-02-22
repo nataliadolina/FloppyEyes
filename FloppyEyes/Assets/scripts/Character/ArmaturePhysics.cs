@@ -7,38 +7,26 @@ public class ArmaturePhysics : MonoBehaviour
     private Rigidbody[] armatureRb;
     private Collider[] armatureColliders;
 
-    void Awake()
+    private void OnEnable()
     {
         Yuna.Lose += TurnOn;
-        Yuna.FreezeRagdoll += TurnOff;
-
+         
         armatureRb = GetComponentsInChildren<Rigidbody>();
         armatureColliders = GetComponentsInChildren<Collider>();
-    }
-
-    private void TurnOff()
-    {
-        foreach (var rb in armatureRb)
-        {
-            rb.isKinematic = true;
-        }
-
-        foreach (var coll in armatureColliders)
-        {
-            coll.enabled = false;
-        }
     }
     
     private void TurnOn()
     {
         foreach (var rb in armatureRb)
         {
-            rb.isKinematic = false;
+            if (rb != null)
+                rb.isKinematic = false;
         }
 
         foreach (var coll in armatureColliders)
         {
-            coll.enabled = true;
+            if (coll != null)
+                coll.enabled = true;
         }
     }
 }

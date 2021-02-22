@@ -340,10 +340,35 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4909209097962391636, guid: aa69f2a84ca73de41877ec7d4e900f97,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4909209097962391636, guid: aa69f2a84ca73de41877ec7d4e900f97,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4909209097962391636, guid: aa69f2a84ca73de41877ec7d4e900f97,
+        type: 3}
+      propertyPath: m_Center.x
+      value: -0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 4909209097962391636, guid: aa69f2a84ca73de41877ec7d4e900f97,
+        type: 3}
+      propertyPath: m_Center.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4909209097962391636, guid: aa69f2a84ca73de41877ec7d4e900f97,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 0.34
+      objectReference: {fileID: 0}
     - target: {fileID: 4909209097962391638, guid: aa69f2a84ca73de41877ec7d4e900f97,
         type: 3}
       propertyPath: m_SlopeLimit
-      value: 91
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4909209097962391638, guid: aa69f2a84ca73de41877ec7d4e900f97,
         type: 3}
@@ -447,7 +472,7 @@ PrefabInstance:
     - target: {fileID: 1249347155412711049, guid: 1c33a970f3609844a8ecf7b3b8ff67ab,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.22
+      value: -0.619
       objectReference: {fileID: 0}
     - target: {fileID: 1249347155412711049, guid: 1c33a970f3609844a8ecf7b3b8ff67ab,
         type: 3}

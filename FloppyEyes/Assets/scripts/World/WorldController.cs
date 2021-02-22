@@ -12,14 +12,13 @@ public class WorldController : MonoBehaviour
     public static float CurrentSpeed { get => cur_speed; set => cur_speed = value; }
     public static float LastSpeed { get => speed; set => speed = value; }
 
-    public static event Action DeleteGem;
     public static event Action OnPlatformMovement;
 
     private float timeSinceLastAccelerate;
 
     void Start()
     {
-        if (PlayerPrefs.HasKey("Speed"))
+        if (!PlayerPrefs.HasKey("hasLost") && PlayerPrefs.HasKey("Speed"))
             cur_speed = PlayerPrefs.GetFloat("Speed");
         else
             cur_speed = initial_speed;
@@ -46,10 +45,6 @@ public class WorldController : MonoBehaviour
                 if (OnPlatformMovement != null)
                 {
                     OnPlatformMovement(); 
-                }
-                if (DeleteGem != null)
-                {
-                    DeleteGem();
                 }
         }
     }

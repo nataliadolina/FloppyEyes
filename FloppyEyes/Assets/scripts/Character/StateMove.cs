@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StateMove : State
 {
-    [SerializeField] private float timeToSwitchRoad;
+    [SerializeField] private float timeToSwitchRoad = 0.0f;
 
     private int currentRoad;
     private int currentDir;
@@ -22,7 +22,7 @@ public class StateMove : State
         return distance;
     }
 
-    private IEnumerator Move()
+    private IEnumerator ChangeRoad()
     {
         while (currentTime < timeToSwitchRoad)
         {
@@ -57,7 +57,7 @@ public class StateMove : State
 
                 distance = ComputeDistance();
                 currentRoad += 1;
-                StartCoroutine(Move());
+                StartCoroutine(ChangeRoad());
             }
             else if (Input.GetKeyDown(KeyCode.A) && currentRoad > -1)
             {
@@ -66,14 +66,24 @@ public class StateMove : State
 
                 distance = ComputeDistance();
                 currentRoad -= 1;
-                StartCoroutine(Move());
+                StartCoroutine(ChangeRoad());
             }
         }
     }
 
-    public override void Hit(ControllerColliderHit hit)
+    public override void Hit(Collision coll)
     {
-        if (!hit.collider.CompareTag("Untagged"))
-            Yuna.Lose();
+        string tag = coll.collider.tag;
+        if (tag != "Untagged" & tag != "-")
+        {
+            Debug.Log("----hitted while moving");
+            Lose();
+        }     
+    }
+
+    public override void Fall()
+    {
+        Debug.Log("----started falling while moving----");
+        character.currentState = character.fall;
     }
 }

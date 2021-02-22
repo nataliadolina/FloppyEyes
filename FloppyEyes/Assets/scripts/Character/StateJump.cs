@@ -5,7 +5,7 @@ using UnityEngine;
 public class StateJump : State
 {
     [SerializeField] private float startSpeed;
-    [SerializeField] private float gravity;
+    [SerializeField] public static float gravity = 40.0f;
 
     private float startHeight;
     private float currentSpeed;
@@ -13,11 +13,14 @@ public class StateJump : State
     private float timeJump;
     private float currentTime;
 
+    private float stepOffset;
+
     private void Start()
-    {
+    { 
         startHeight = character.transform.position.y;
         currentSpeed = startSpeed;
         timeJump = 2 * startSpeed / gravity;
+        stepOffset = cc.stepOffset;
     }
 
     public override void Run()
@@ -39,29 +42,35 @@ public class StateJump : State
         }
     }
 
-    public override void Hit(ControllerColliderHit hit)
+    public override void Hit(Collision hit)
     {
         
         Transform otherTransform = hit.transform;
         Collider hitCollider = hit.collider;
         float delta = otherTransform.localScale.y - characterTransform.position.y + characterTransform.localScale.y * 0.75f;
-        if (delta > 5 || hitCollider.CompareTag("kill")) /*если слишком высоко, то игра заканчивается*/
-            Yuna.Lose();
+        Debug.Log(delta);
+        if (delta > 5 || hitCollider.CompareTag("kill"))
+        {
+            Lose();
+            return;
+        }
         
         else if (hitCollider.CompareTag("Obstacle"))
         {
-            if (delta <= 5 && delta > 0.6)
+            if (delta <= 5 & delta > stepOffset)
             {
                 animator.SetTrigger("climb");
                 WorldController.SaveCurrentSpeed();
                 WorldController.StopMoving();
+                hitCollider.tag = "-";
                 character.currentState = character.climb;
                 character.currentState.distance = delta;
-                hitCollider.tag = "-";
+                return;
             }
-            else if (delta <= 0.6)
+            else if (delta <= stepOffset)
             {
                 hitCollider.tag = "-";
+                return;
             }
         }
         
