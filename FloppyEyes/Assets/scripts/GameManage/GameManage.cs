@@ -50,16 +50,16 @@ public class GameManage : MonoBehaviour
         }
     }
 
-    private IEnumerator WaitToRestart()
+    private IEnumerator WaitToRestart(float waitForSeconds)
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(waitForSeconds);
         SaveSettings.Save();
         SceneManager.LoadScene("SampleScene");
     }
 
-    public void Restart()
+    public void Restart(float waitForSeconds=0f)
     {
-        StartCoroutine(WaitToRestart()); 
+        StartCoroutine(WaitToRestart(waitForSeconds)); 
     }
 
     public void GetBackToMenu()
@@ -68,6 +68,4 @@ public class GameManage : MonoBehaviour
         Time.timeScale = 1;
         SaveSettings.Save(false);
     }
-
-    
 }

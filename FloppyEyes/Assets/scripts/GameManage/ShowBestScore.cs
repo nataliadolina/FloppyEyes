@@ -16,5 +16,6 @@ public class ShowBestScore : MonoBehaviour
         }
         string score = PlayerPrefs.GetFloat("BestScore").ToString();
         content.text = score;
+        Debug.Log(score);
     }
 }

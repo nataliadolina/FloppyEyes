@@ -5,7 +5,7 @@ using System;
 
 public class WorldController : MonoBehaviour
 {
-    [SerializeField] static float initial_speed = 2.5f;
+    public static float initial_speed = 2.5f;
     static float cur_speed = 0f;
     static float speed = 0f;
 
@@ -18,10 +18,9 @@ public class WorldController : MonoBehaviour
 
     void Start()
     {
-        if (!PlayerPrefs.HasKey("hasLost") && PlayerPrefs.HasKey("Speed"))
+        cur_speed = initial_speed;
+        if (PlayerPrefs.HasKey("Speed"))
             cur_speed = PlayerPrefs.GetFloat("Speed");
-        else
-            cur_speed = initial_speed;
         speed = cur_speed;
         StartCoroutine(OnPlatformMovementCoroutine());
     }

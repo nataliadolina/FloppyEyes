@@ -310,7 +310,7 @@ MonoBehaviour:
       - m_Target: {fileID: 630171867}
         m_TargetAssemblyTypeName: GameManage, Assembly-CSharp
         m_MethodName: Restart
-        m_Mode: 1
+        m_Mode: 4
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1149,6 +1149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8a20bd480865ad419f0f1d9103703ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  place: 0
 --- !u!114 &1392114609
 MonoBehaviour:
   m_ObjectHideFlags: 0

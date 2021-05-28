@@ -25,7 +25,6 @@ public class StateFall : State
 
     public override void Hit(Collision hit)
     {
-        Debug.Log("----Hites while falling------");
         Terminate();
     }
 }

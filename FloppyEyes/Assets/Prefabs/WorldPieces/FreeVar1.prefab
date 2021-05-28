@@ -1414,7 +1414,8 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -0.4
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4654824011006807055, guid: aa20547dfc1c8104e9a4bb855c15ca97, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: aa20547dfc1c8104e9a4bb855c15ca97, type: 3}
 --- !u!4 &7540658959016040461 stripped
 Transform:

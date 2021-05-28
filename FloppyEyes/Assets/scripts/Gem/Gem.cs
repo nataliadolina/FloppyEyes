@@ -29,6 +29,7 @@ public class Gem : MonoBehaviour
             Destroy(sparkles);
             Destroy(gameObject);
         }
+        ShowScore.ChangeScore();
     }
 
 }

@@ -3,22 +3,37 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+public enum ScorePlace
+{
+    StartScreen,
+    Game
+}
+
 public class ShowScore : MonoBehaviour
 {
+    [SerializeField] private ScorePlace place;
     public static float score;
-    private static Text text;
+    private float showScore;
+    public static Text text;
 
     private void Start()
     {
+        score = 0f;
         text = GetComponent<Text>();
         if (PlayerPrefs.HasKey("Score"))
         {
-            score = PlayerPrefs.GetFloat("Score");
+            if (PlayerPrefs.HasKey("HasLost"))
+            {
+                if (PlayerPrefs.GetString("HasLost") == "-")
+                {
+                    score = PlayerPrefs.GetFloat("Score");
+                    showScore = score;
+                }
+            }
+            else if (place == ScorePlace.StartScreen)
+                showScore = PlayerPrefs.GetFloat("Score");
+            text.text = showScore.ToString();
         }
-        else
-            score = 0;
-        text.text = score.ToString();
-        text = GetComponent<Text>();
     }
 
     public static void ChangeScore()

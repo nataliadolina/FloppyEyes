@@ -18,9 +18,7 @@ public class Yuna : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("enabled");
         yunaAnim = GetComponent<Animator>();
-
     }
     
     private void Update()

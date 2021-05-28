@@ -14,21 +14,38 @@ public class SaveSettings : MonoBehaviour
             { false, 0}
         };
     }
-    public static void Save(bool lose = true)
+
+    private static void SaveScore()
     {
-        if (!PlayerPrefs.HasKey("hasLost"))
-            PlayerPrefs.SetString("hasLost", "+");
-
-        if (!lose)
-            PlayerPrefs.DeleteKey("hasLost");
-
         PlayerPrefs.SetFloat("Score", ShowScore.score);
-        if (ShowScore.score > PlayerPrefs.GetFloat("BestScore"))
+        if (!PlayerPrefs.HasKey("BestScore") | PlayerPrefs.GetFloat("BestScore") == 0f)
         {
             PlayerPrefs.SetFloat("BestScore", ShowScore.score);
         }
+        else if (ShowScore.score > PlayerPrefs.GetFloat("BestScore"))
+        {
+            PlayerPrefs.SetFloat("BestScore", ShowScore.score);
+        }
+    }
+
+    private static void SaveSpeed(float value)
+    {
+        PlayerPrefs.SetFloat("Speed", value);
+    }
+
+    public static void Save(bool lose = true)
+    {
+        SaveScore();
+        if (lose)
+        {
+            PlayerPrefs.SetString("hasLost", "+");
+            SaveSpeed(WorldController.initial_speed);
+        }
 
         if (!lose)
-            PlayerPrefs.SetFloat("Speed", WorldController.CurrentSpeed);
+        {
+            PlayerPrefs.SetString("hasLost", "-");
+            SaveSpeed(WorldController.CurrentSpeed);
+        }         
     }
 }

@@ -35,9 +35,10 @@ public abstract class State : MonoBehaviour
     protected void Lose()
     {
         animator.enabled = false;
+        SaveSettings.Save();
         Yuna.Lose();
         WorldController.StopMoving();
-        gameManager.Restart();
+        gameManager.Restart(2.5f);
     }
 
     public virtual void Move()
